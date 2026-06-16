@@ -20,8 +20,8 @@ export async function GET(request: NextRequest) {
       prisma.expense.findMany({ where: { type: 'EXPENSE', transactionDate: { gte: prevStart, lte: prevEnd } } })
     ]);
 
-    const currTotal = currExpenses.reduce((s, e) => s + e.amount, 0);
-    const prevTotal = prevExpenses.reduce((s, e) => s + e.amount, 0);
+    const currTotal = currExpenses.reduce((s: number, e: { amount: number }) => s + e.amount, 0);
+    const prevTotal = prevExpenses.reduce((s: number, e: { amount: number }) => s + e.amount, 0);
 
     const insights: { type: string; title: string; message: string; amount: number }[] = [];
     const savingTips: { category: string; changeRate: number; savingAmount: number; message: string }[] = [];
